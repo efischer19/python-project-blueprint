@@ -39,13 +39,13 @@ for all Python applications and libraries in this project.
 ```bash
 # Run all tests in a project
 cd apps/<app-name>
-poetry run pytest
+uv run pytest
 
 # Run with verbose output
-poetry run pytest -v
+uv run pytest -v
 
 # Run with coverage
-poetry run pytest --cov=src
+uv run pytest --cov=src
 ```
 
 ## Considered Options

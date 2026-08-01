@@ -6,20 +6,20 @@
 
 ```bash
 cd apps/{{ cookiecutter.app_name }}
-poetry install
+uv sync
 ```
 
 ## Usage
 
 ```bash
-poetry run {{ cookiecutter.app_name }} hello
+uv run {{ cookiecutter.app_name }} hello
 ```
 
 ## Development
 
 ```bash
-poetry install
-poetry run pytest
-poetry run ruff check .
-poetry run ruff format --check .
+uv sync
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
 ```

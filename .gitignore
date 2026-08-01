@@ -80,10 +80,11 @@ htmlcov/
 .ruff_cache/
 
 # =============================================================================
-# Poetry
+# uv
 # =============================================================================
-# poetry.lock is intentionally NOT ignored — lock files should be committed
+# uv.lock is intentionally NOT ignored — lock files should be committed
 # for applications. Libraries may choose to ignore them.
+
 
 # =============================================================================
 # Build artifacts and logs

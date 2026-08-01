@@ -7,16 +7,18 @@
 Add a path dependency from your application:
 
 ```toml
-[tool.poetry.dependencies]
-{{ cookiecutter.lib_name }} = { path = "../../libs/{{ cookiecutter.lib_name }}", develop = true }
+[project]
+dependencies = [
+    "{{ cookiecutter.lib_name }} @ file://../../libs/{{ cookiecutter.lib_name }}"
+]
 ```
 
 ## Development
 
 ```bash
 cd libs/{{ cookiecutter.lib_name }}
-poetry install
-poetry run pytest
-poetry run ruff check .
-poetry run ruff format --check .
+uv sync
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
 ```

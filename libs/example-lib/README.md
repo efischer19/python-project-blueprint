@@ -7,7 +7,7 @@
 This library provides a minimal example of how shared libraries work in the
 monorepo. It demonstrates:
 
-* Library structure with `pyproject.toml` and Poetry
+* Library structure with `pyproject.toml` and uv
 * Snake\_case Python package naming (`example_lib`)
 * Kebab-case directory naming (`example-lib`)
 * Path dependency pattern for monorepo consumers
@@ -18,14 +18,16 @@ monorepo. It demonstrates:
 From an application in the monorepo, add a path dependency:
 
 ```toml
-[tool.poetry.dependencies]
-example-lib = { path = "../../libs/example-lib", develop = true }
+[project]
+dependencies = [
+    "example-lib @ file://../../libs/example-lib"
+]
 ```
 
 Then install:
 
 ```bash
-poetry install
+uv sync
 ```
 
 ## Usage
@@ -50,8 +52,8 @@ Returns a greeting message for the given name.
 
 ```bash
 cd libs/example-lib
-poetry install
-poetry run pytest
-poetry run ruff check .
-poetry run ruff format --check .
+uv sync
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
 ```

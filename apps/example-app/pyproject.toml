@@ -1,26 +1,29 @@
-[tool.poetry]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
 name = "example-app"
 version = "0.1.0"
 description = "Example application demonstrating the monorepo app pattern"
-authors = ["{{GITHUB_OWNER}}"]
 readme = "README.md"
-packages = [{include = "app"}]
+requires-python = ">=3.12"
+authors = [
+    {name = "{{GITHUB_OWNER}}"}
+]
+dependencies = [
+    "click>=8.4",
+    "example-lib"
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-click = "^8.4"
-example-lib = { path = "../../libs/example-lib", develop = true }
+[dependency-groups]
+dev = [
+    "pytest>=9.1",
+    "ruff>=0.16",
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^9.1"
-ruff = "^0.16"
-
-[tool.poetry.scripts]
+[project.scripts]
 example-app = "app.main:cli"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 target-version = "py312"
@@ -32,5 +35,14 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 [tool.ruff.format]
 quote-style = "double"
 
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.uv.sources]
+example-lib = { workspace = true }

@@ -44,8 +44,8 @@ Before submitting any pull request, ensure your changes pass the same quality ch
 
 This project uses the following Python tooling:
 
-* **[Poetry](https://python-poetry.org/)** for dependency management
-  (see [ADR-003](../meta/adr/ADR-003-use_poetry.md))
+* **[uv](https://docs.astral.sh/uv/)** for dependency management
+  (see [ADR-015](../meta/adr/ADR-015-use_uv.md))
 * **[Ruff](https://docs.astral.sh/ruff/)** for linting and formatting
   (see [ADR-005](../meta/adr/ADR-005-use_ruff.md))
 * **[pytest](https://docs.pytest.org/)** for testing
@@ -57,23 +57,23 @@ This project uses the following Python tooling:
 # Navigate to an app or lib directory
 cd apps/<app-name>
 
-# Install dependencies with Poetry
-poetry install
+# Install dependencies with uv
+uv sync
 
 # Run linting
-poetry run ruff check .
+uv run ruff check .
 
 # Run formatting
-poetry run ruff format .
+uv run ruff format .
 
 # Run tests
-poetry run pytest
+uv run pytest
 
 # Run tests with coverage
-poetry run pytest --cov
+uv run pytest --cov
 
 # Run type checking (if mypy is configured)
-poetry run mypy .
+uv run mypy .
 ```
 
 ### Pre-Commit Checks

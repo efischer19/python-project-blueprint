@@ -7,7 +7,7 @@
 This application provides a minimal example of how applications work in the
 monorepo. It demonstrates:
 
-* Application structure with `pyproject.toml` and Poetry
+* Application structure with `pyproject.toml` and uv
 * Click-based CLI (per [ADR-011](../../meta/adr/ADR-011-use_click.md))
 * Path dependency on a shared library (`example-lib`)
 * Testing CLI commands with `click.testing.CliRunner`
@@ -16,17 +16,17 @@ monorepo. It demonstrates:
 
 ```bash
 cd apps/example-app
-poetry install
+uv sync
 ```
 
 ## Usage
 
 ```bash
 # Run the CLI
-poetry run example-app hello
+uv run example-app hello
 # Output: Hello, World!
 
-poetry run example-app hello --name Python
+uv run example-app hello --name Python
 # Output: Hello, Python!
 ```
 
@@ -34,10 +34,10 @@ poetry run example-app hello --name Python
 
 ```bash
 cd apps/example-app
-poetry install
-poetry run pytest
-poetry run ruff check .
-poetry run ruff format --check .
+uv sync
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
 ```
 
 ## Dependencies
