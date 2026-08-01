@@ -15,6 +15,8 @@ RUN pip install --no-cache-dir uv
 
 WORKDIR /build
 
+COPY pyproject.toml uv.lock ./
+
 # Copy the shared library (local path dependency)
 COPY libs/example-lib ./libs/example-lib
 
@@ -22,8 +24,8 @@ COPY libs/example-lib ./libs/example-lib
 COPY apps/example-app/pyproject.toml ./apps/example-app/
 
 # Use uv to generate requirements from the lock file for reproducible builds.
-# The local path dependency (example-lib) is excluded and handled separately.
 RUN uv export \
+      --package example-app \
       --frozen \
       --no-dev \
       --no-hashes \
