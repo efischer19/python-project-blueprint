@@ -41,21 +41,22 @@ all shared libraries in `libs/`.
 * While at `0.x.y`, minor version bumps may include breaking changes
   (per SemVer spec).
 * Version `1.0.0` signals a stable public API.
-* Within the monorepo, applications reference libraries as **path
-  dependencies** — the version number serves as documentation of the
-  API contract, not as a resolution constraint.
+* Within the monorepo, applications reference libraries as workspace
+  dependencies — uv automatically resolves these local connections,
+  and the version number serves as documentation of the API contract,
+  not as a resolution constraint.
 * If a library is published externally, the version becomes a hard
   contract with downstream consumers.
 * Version bumps should be accompanied by a changelog entry in the
   library's `README.md` or `CHANGELOG.md`.
 
-### Path Dependency Example
+### Workspace Dependency Example
 
 ```toml
 # In apps/my-app/pyproject.toml
 [project]
 dependencies = [
-    "my-lib @ file://../../libs/my-lib"
+    "my-lib" # Resolved automatically via uv workspace
 ]
 ```
 
