@@ -23,8 +23,7 @@ COPY apps/example-app/pyproject.toml ./apps/example-app/
 
 # Use uv to generate requirements from the lock file for reproducible builds.
 # The local path dependency (example-lib) is excluded and handled separately.
-RUN cd apps/example-app \
-    && uv export \
+RUN uv export \
       --frozen \
       --no-dev \
       --no-hashes \
