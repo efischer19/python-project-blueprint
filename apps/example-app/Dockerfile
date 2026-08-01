@@ -19,8 +19,7 @@ WORKDIR /build
 COPY libs/example-lib ./libs/example-lib
 
 # Copy application manifests before source code for Docker layer cache efficiency
-COPY apps/example-app/pyproject.toml apps/example-app/uv.lock \
-     ./apps/example-app/
+COPY apps/example-app/pyproject.toml ./apps/example-app/
 
 # Use uv to generate requirements from the lock file for reproducible builds.
 # The local path dependency (example-lib) is excluded and handled separately.
