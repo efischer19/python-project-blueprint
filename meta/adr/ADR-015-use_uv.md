@@ -43,6 +43,10 @@ Each application in `apps/` and each library in `libs/` will have its own
 - **Extreme speed** — dependency resolution and installation are
   10-100x faster than Poetry due to uv's Rust implementation.
 
+To seamlessly link these components, we will utilize uv workspaces. A root 
+`pyproject.toml` will define the workspace, allowing applications to depend
+on local libraries by name without brittle relative file paths.
+
 ### Key Conventions
 
 - Applications **commit** their `uv.lock` files for reproducible
@@ -52,6 +56,8 @@ Each application in `apps/` and each library in `libs/` will have its own
 - Use `uv sync` to install dependencies into the project's `.venv`.
 - Use `uv run <command>` to execute commands within the virtual
   environment (e.g., `uv run pytest`, `uv run ruff check .`).
+- Internal dependencies between apps/ and libs/ must rely on the uv workspace
+  resolution rather than hardcoded file:// URIs.
 
 ## Considered Options
 
