@@ -1,7 +1,7 @@
-name: Setup Python and Poetry
+name: Setup Python and uv
 description: >
-  Reusable composite action to set up Python, install Poetry, and restore
-  the project virtual environment from cache (keyed on poetry.lock hash).
+  Reusable composite action to set up Python, install uv, and restore
+  the project virtual environment from cache (keyed on uv.lock hash).
 
 inputs:
   python-version:
@@ -9,7 +9,7 @@ inputs:
     required: false
     default: "3.12"
   working-directory:
-    description: Directory containing pyproject.toml and poetry.lock
+    description: Directory containing pyproject.toml and uv.lock
     required: false
     default: "."
 
@@ -21,21 +21,16 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
 
-    - name: Install Poetry
+    - name: Install uv
       shell: bash
-      run: pip install --quiet poetry
-
-    - name: Configure Poetry to create in-project virtual environments
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: poetry config virtualenvs.in-project true
+      run: pip install --quiet uv
 
     - name: Cache virtual environment
       id: cache-venv
       uses: actions/cache@v4
       with:
         path: ${{ inputs.working-directory }}/.venv
-        key: venv-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles(format('{0}/poetry.lock', inputs.working-directory)) }}
+        key: venv-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles(format('{0}/uv.lock', inputs.working-directory)) }}
         restore-keys: |
           venv-${{ runner.os }}-${{ inputs.python-version }}-
 
@@ -43,4 +38,4 @@ runs:
       if: steps.cache-venv.outputs.cache-hit != 'true'
       shell: bash
       working-directory: ${{ inputs.working-directory }}
-      run: poetry install --no-interaction
+      run: uv sync --frozen

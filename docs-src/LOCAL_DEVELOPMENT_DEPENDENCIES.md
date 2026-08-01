@@ -7,7 +7,7 @@
 | Tool | Version | Purpose | Install |
 | :--- | :--- | :--- | :--- |
 | **Python** | 3.12+ | Runtime | [python.org](https://www.python.org/) or `pyenv install 3.12` |
-| **Poetry** | 2.x | Dependency management | [install.python-poetry.org](https://install.python-poetry.org) |
+| **uv** | latest | Dependency management | [docs.astral.sh/uv](https://docs.astral.sh/uv/getting-started/) |
 | **Git** | 2.x | Version control | [git-scm.com](https://git-scm.com/) |
 
 ## Recommended Tools
@@ -26,8 +26,8 @@
 pyenv install 3.12
 pyenv local 3.12
 
-# 2. Install Poetry
-curl -sSL https://install.python-poetry.org | python3 -
+# 2. Install uv
+pip install uv
 
 # 3. Install pre-commit hooks
 pip install pre-commit
@@ -54,22 +54,22 @@ pyenv local 3.12
 python --version  # Should output Python 3.12.x
 ```
 
-## Poetry
+## uv
 
-Poetry manages dependencies, virtual environments, and package metadata for
+uv manages dependencies, virtual environments, and package metadata for
 each application and library in the monorepo. See
-[ADR-003](https://github.com/{{GITHUB_OWNER}}/{{PROJECT_NAME}}/blob/main/meta/adr/ADR-003-use_poetry.md).
+[ADR-015](https://github.com/{{GITHUB_OWNER}}/{{PROJECT_NAME}}/blob/main/meta/adr/ADR-015-use_uv.md).
 
 ```bash
-# Install Poetry
-curl -sSL https://install.python-poetry.org | python3 -
+# Install uv
+pip install uv
 
 # Install a project's dependencies
 cd apps/example-app
-poetry install
+uv sync
 
 # Run a command in the project's virtual environment
-poetry run pytest
+uv run pytest
 ```
 
 ## Ruff
@@ -79,16 +79,16 @@ Ruff handles both linting and formatting for Python code. See
 
 ```bash
 # Check formatting
-poetry run ruff format --check .
+uv run ruff format --check .
 
 # Auto-format
-poetry run ruff format .
+uv run ruff format .
 
 # Lint
-poetry run ruff check .
+uv run ruff check .
 
 # Lint with auto-fix
-poetry run ruff check --fix .
+uv run ruff check --fix .
 ```
 
 ## Pre-commit

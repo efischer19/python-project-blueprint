@@ -36,7 +36,7 @@ all shared libraries in `libs/`.
 ### Key Conventions
 
 * Library versions are defined in their `pyproject.toml` under
-  `[tool.poetry] version`.
+  `[project] version`.
 * All libraries start at version `0.1.0` until their API stabilizes.
 * While at `0.x.y`, minor version bumps may include breaking changes
   (per SemVer spec).
@@ -53,8 +53,10 @@ all shared libraries in `libs/`.
 
 ```toml
 # In apps/my-app/pyproject.toml
-[tool.poetry.dependencies]
-my-lib = { path = "../../libs/my-lib", develop = true }
+[project]
+dependencies = [
+    "my-lib @ file://../../libs/my-lib"
+]
 ```
 
 ## Considered Options

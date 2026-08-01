@@ -109,19 +109,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      - name: Set up Python and Poetry
-        uses: ./.github/actions/setup-python-poetry
+      - name: Set up Python and uv
+        uses: ./.github/actions/setup-python-uv
         with:
           working-directory: ${{ matrix.project }}
 
       - name: Ruff format check
         working-directory: ${{ matrix.project }}
-        run: poetry run ruff format --check .
+        run: uv run ruff format --check .
 
       - name: Ruff lint
         working-directory: ${{ matrix.project }}
-        run: poetry run ruff check .
+        run: uv run ruff check .
 
       - name: pytest
         working-directory: ${{ matrix.project }}
-        run: poetry run pytest
+        run: uv run pytest

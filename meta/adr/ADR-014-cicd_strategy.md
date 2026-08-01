@@ -15,8 +15,8 @@ tags:
   validates code quality, runs tests, demonstrates packaging for PyPI,
   and builds Docker images — while remaining simple enough to serve as a
   learning blueprint for downstream projects.
-* **Constraints:** The strategy must work with the existing Poetry-based
-  dependency management (ADR-003), use pytest for tests (ADR-004), use
+* **Constraints:** The strategy must work with the existing uv-based
+  dependency management (ADR-015), use pytest for tests (ADR-004), use
   Ruff for linting (ADR-005), and support Docker-based deployment
   (ADR-006). It must not require credentials for external registries in
   the template repository itself.
@@ -26,15 +26,14 @@ tags:
 We will use **GitHub Actions** to implement a multi-workflow CI/CD
 pipeline with the following components:
 
-### Reusable Composite Action (`setup-python-poetry`)
+### Reusable Composite Action (`setup-python-uv`)
 
-A composite action at `.github/actions/setup-python-poetry/action.yml`
-standardizes Python and Poetry setup across all workflows. It:
+A composite action at `.github/actions/setup-python-uv/action.yml`
+standardizes Python and uv setup across all workflows. It:
 
 * Installs the specified Python version via `actions/setup-python`
-* Installs Poetry via `pip`
-* Configures in-project virtual environments (`virtualenvs.in-project true`)
-* Caches the `.venv` directory keyed on `os + python-version + poetry.lock hash`
+* Installs uv via `pip`
+* Caches the `.venv` directory keyed on `os + python-version + uv.lock hash`
 
 ### Continuous Integration (`ci.yml`)
 
@@ -51,8 +50,8 @@ Runs on every pull request and push to `main`. Jobs include:
 
 Runs on version tags (`v*`) or manual dispatch. It:
 
-* Builds the package with `poetry build`
-* Includes the `poetry publish` step **commented out** with clear
+* Builds the package with `uv build`
+* Includes the `uv publish` step **commented out** with clear
   instructions for enabling it
 * Requires a `PYPI_TOKEN` repository secret to activate publishing
 

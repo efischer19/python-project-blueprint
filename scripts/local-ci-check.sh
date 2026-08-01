@@ -6,7 +6,7 @@
 #
 # Prerequisites:
 #   pip install pre-commit
-#   Poetry installed (https://python-poetry.org/)
+#   uv installed (https://docs.astral.sh/uv/getting-started/)
 #
 # Usage:
 #   ./scripts/local-ci-check.sh              # Run repo-wide checks only
@@ -75,19 +75,19 @@ if [ -n "$TARGET_DIR" ]; then
   echo "▶ Running Python quality checks for $TARGET_DIR..."
   cd "$PROJECT_PATH"
 
-  echo "  ▸ poetry install..."
-  poetry install --quiet
+  echo "  ▸ uv sync --frozen..."
+  uv sync --frozen
 
   echo "  ▸ ruff format --check..."
-  poetry run ruff format --check .
+  uv run ruff format --check .
   echo "  ✅ Formatting OK"
 
   echo "  ▸ ruff check..."
-  poetry run ruff check .
+  uv run ruff check .
   echo "  ✅ Linting OK"
 
   echo "  ▸ pytest..."
-  poetry run pytest
+  uv run pytest
   echo "  ✅ Tests passed"
 
   echo ""

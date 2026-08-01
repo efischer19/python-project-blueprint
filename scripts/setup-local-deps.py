@@ -2,7 +2,7 @@
 """Install local dependencies across the monorepo.
 
 Walks through all apps/ and libs/ directories that contain a pyproject.toml
-and runs ``poetry install`` in each one. This ensures every project has its
+and runs ``uv sync`` in each one. This ensures every project has its
 dependencies (including path dependencies on sibling libraries) installed
 and ready for development.
 
@@ -36,11 +36,11 @@ def find_projects() -> list[Path]:
 
 
 def install_project(project: Path) -> bool:
-    """Run ``poetry install`` in *project*. Return True on success."""
+    """Run ``uv sync`` in *project*. Return True on success."""
     relative = project.relative_to(REPO_ROOT)
     print(f"\n▶ Installing {relative} ...")
     result = subprocess.run(
-        ["poetry", "install"],
+        ["uv", "sync"],
         cwd=project,
         capture_output=True,
         text=True,

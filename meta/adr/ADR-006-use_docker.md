@@ -16,7 +16,7 @@ tags:
   developer machines, CI runners, and production servers cause "works on
   my machine" problems.
 * **Constraints:** The containerization approach must support Python
-  applications with Poetry-managed dependencies, multi-stage builds for
+  applications with uv-managed dependencies, multi-stage builds for
   small production images, and work across both x86_64 and ARM
   architectures.
 
@@ -29,7 +29,7 @@ project.
 
 * Each deployable application in `apps/` may include a `Dockerfile`.
 * Use **multi-stage builds** to keep production images small:
-  * **Builder stage:** Install Poetry, resolve dependencies, build wheels.
+  * **Builder stage:** Install uv, resolve dependencies, build wheels.
   * **Runtime stage:** Copy only the built artifacts and runtime
     dependencies.
 * Base images should use `python:3.12-slim` (Debian-based slim images)
@@ -43,10 +43,10 @@ project.
 ```dockerfile
 # Builder stage
 FROM python:3.12-slim AS builder
-RUN pip install poetry
+RUN pip install uv
 WORKDIR /app
-COPY pyproject.toml poetry.lock ./
-RUN poetry export -f requirements.txt --output requirements.txt
+COPY pyproject.toml uv.lock ./
+RUN uv export --frozen --output requirements.txt
 RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
 
 # Runtime stage

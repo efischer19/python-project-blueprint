@@ -15,7 +15,7 @@ services:
     build:
       context: .
       dockerfile: apps/example-app/Dockerfile
-    command: ["poetry", "run", "pytest"]
+    command: ["uv", "run", "pytest"]
     working_dir: /app
     volumes:
       - ./apps/example-app:/app
@@ -25,7 +25,7 @@ services:
     build:
       context: .
       dockerfile: libs/example-lib/Dockerfile
-    command: ["poetry", "run", "pytest"]
+    command: ["uv", "run", "pytest"]
     working_dir: /app
     volumes:
       - ./libs/example-lib:/app

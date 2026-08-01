@@ -24,7 +24,7 @@ All library versions use the `MAJOR.MINOR.PATCH` format:
 New libraries start at version `0.1.0`:
 
 ```toml
-[tool.poetry]
+[project]
 name = "my-lib"
 version = "0.1.0"
 ```
@@ -40,13 +40,14 @@ as documentation of the API contract rather than a resolution constraint.
 
 ```toml
 # In apps/my-app/pyproject.toml
-[tool.poetry.dependencies]
-my-lib = { path = "../../libs/my-lib", develop = true }
+[project]
+dependencies = [
+    "my-lib @ file://../../libs/my-lib"
+]
 ```
 
-The `develop = true` flag installs the library in editable mode so that
-changes to the library source are immediately reflected in the application
-without reinstalling.
+This installs the library in editable mode so that changes to the library
+source are immediately reflected in the application without reinstalling.
 
 ## When to Bump Versions
 
