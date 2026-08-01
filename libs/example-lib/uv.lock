@@ -16,18 +16,19 @@ name = "example-lib"
 version = "0.1.0"
 source = { editable = "." }
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "pytest" },
     { name = "ruff" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.0" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.15,<0.17" },
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest", specifier = ">=9.0" },
+    { name = "ruff", specifier = ">=0.15,<0.17" },
 ]
-provides-extras = ["dev"]
 
 [[package]]
 name = "iniconfig"

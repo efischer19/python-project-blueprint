@@ -32,7 +32,7 @@ dependencies = [
     { name = "example-lib" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "pytest" },
     { name = "ruff" },
@@ -42,10 +42,13 @@ dev = [
 requires-dist = [
     { name = "click", specifier = ">=8.4" },
     { name = "example-lib", directory = "/home/runner/work/python-project-blueprint/python-project-blueprint/libs/example-lib" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.1" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.16" },
 ]
-provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest", specifier = ">=9.1" },
+    { name = "ruff", specifier = ">=0.16" },
+]
 
 [[package]]
 name = "example-lib"
@@ -53,11 +56,12 @@ version = "0.1.0"
 source = { directory = "/home/runner/work/python-project-blueprint/python-project-blueprint/libs/example-lib" }
 
 [package.metadata]
-requires-dist = [
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.0" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.15,<0.17" },
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest", specifier = ">=9.0" },
+    { name = "ruff", specifier = ">=0.15,<0.17" },
 ]
-provides-extras = ["dev"]
 
 [[package]]
 name = "iniconfig"

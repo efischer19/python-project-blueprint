@@ -16,7 +16,7 @@ dependencies = [
     "example-lib @ file:///home/runner/work/python-project-blueprint/python-project-blueprint/libs/example-lib"
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "pytest>=9.1",
     "ruff>=0.16",
