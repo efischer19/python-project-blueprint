@@ -43,7 +43,7 @@ Each application in `apps/` and each library in `libs/` will have its own
 - **Extreme speed** — dependency resolution and installation are
   10-100x faster than Poetry due to uv's Rust implementation.
 
-To seamlessly link these components, we will utilize uv workspaces. A root 
+To seamlessly link these components, we will utilize uv workspaces. A root
 `pyproject.toml` will define the workspace, allowing applications to depend
 on local libraries by name without brittle relative file paths.
 
