@@ -2,6 +2,12 @@ version = 1
 revision = 3
 requires-python = ">=3.12"
 
+[manifest]
+members = [
+    "example-app",
+    "example-lib",
+]
+
 [[package]]
 name = "click"
 version = "8.4.2"
@@ -26,7 +32,7 @@ wheels = [
 [[package]]
 name = "example-app"
 version = "0.1.0"
-source = { editable = "." }
+source = { editable = "apps/example-app" }
 dependencies = [
     { name = "click" },
     { name = "example-lib" },
@@ -41,7 +47,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "click", specifier = ">=8.4" },
-    { name = "example-lib", directory = "/home/runner/work/python-project-blueprint/python-project-blueprint/libs/example-lib" },
+    { name = "example-lib", editable = "libs/example-lib" },
 ]
 
 [package.metadata.requires-dev]
@@ -53,7 +59,13 @@ dev = [
 [[package]]
 name = "example-lib"
 version = "0.1.0"
-source = { directory = "/home/runner/work/python-project-blueprint/python-project-blueprint/libs/example-lib" }
+source = { editable = "libs/example-lib" }
+
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "ruff" },
+]
 
 [package.metadata]
 
