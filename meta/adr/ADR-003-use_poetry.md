@@ -1,7 +1,7 @@
 ---
 title: "ADR-003: Use Poetry for Dependency Management"
-status: "Accepted"
-date: "2026-03-31"
+status: "Superseded"
+date: "2026-08-01"
 tags:
   - "python"
   - "dependencies"
