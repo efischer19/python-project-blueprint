@@ -13,7 +13,7 @@ authors = [
 ]
 dependencies = [
     "click>=8.4",
-    "example-lib @ file:///home/runner/work/python-project-blueprint/python-project-blueprint/libs/example-lib"
+    "example-lib @ file:///home/runner/work/python-project-blueprint/libs/example-lib"
 ]
 
 [dependency-groups]
