@@ -12,7 +12,7 @@ authors = [
     {name = "{{GITHUB_OWNER}}"}
 ]
 dependencies = [
-    "click>=8.4.2",
+    "click>=8.5.0",
     "example-lib"
 ]
 
