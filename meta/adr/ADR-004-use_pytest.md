@@ -14,7 +14,7 @@ tags:
   supports clear, maintainable tests across all applications and libraries.
   The testing approach should support fixtures, parameterization, and
   plugin extensibility.
-* **Constraints:** The framework must work well with Poetry, integrate
+* **Constraints:** The framework must work well with uv, integrate
   easily with CI/CD pipelines, and support both unit and integration
   testing patterns.
 

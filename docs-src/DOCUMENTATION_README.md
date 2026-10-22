@@ -16,7 +16,7 @@ using MkDocs.
 ## Prerequisites
 
 * Python 3.12+
-* pip (or Poetry)
+* pip (or uv)
 
 Install the documentation dependencies:
 

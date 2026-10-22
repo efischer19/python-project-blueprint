@@ -14,7 +14,7 @@ tags:
   shared libraries, we need a clear organizational structure that keeps
   code discoverable, independently deployable, and easy to maintain.
 * **Constraints:** The structure must support independent dependency
-  management per project (via Poetry), allow shared code reuse, and work
+  management per project (via uv, ADR-015), allow shared code reuse, and work
   well with CI/CD pipelines that may build and deploy applications
   independently.
 
@@ -37,7 +37,7 @@ top-level directory structure:
 
 Each subdirectory in `apps/` is a standalone application with:
 
-* Its own `pyproject.toml` (managed by Poetry)
+* Its own `pyproject.toml` (a uv workspace member)
 * Its own `src/` directory for source code
 * Its own `tests/` directory for tests
 * Its own `Dockerfile` (if containerized)
@@ -49,13 +49,20 @@ Applications are independently buildable, testable, and deployable.
 
 Each subdirectory in `libs/` is a shared library with:
 
-* Its own `pyproject.toml` (managed by Poetry)
+* Its own `pyproject.toml` (a uv workspace member)
 * Its own `src/` directory for source code
 * Its own `tests/` directory for tests
 * Its own `README.md` documenting the public API
 
-Libraries are consumed by applications as path dependencies or published
-packages.
+Libraries are consumed by applications as uv workspace dependencies
+(`{ workspace = true }` in `[tool.uv.sources]`) or as published packages.
+
+### Workspace and Lock File
+
+The root `pyproject.toml` declares a uv workspace whose members are
+`apps/*` and `libs/*`. A single `uv.lock` at the repository root pins
+dependencies for every member, so all projects resolve against one
+consistent set of versions.
 
 ### Shared Testing (`testing/`)
 
