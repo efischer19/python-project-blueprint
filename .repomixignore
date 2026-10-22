@@ -30,7 +30,7 @@ docs-requirements.txt
 templates/
 
 # 5. Lockfiles & Local Env (usually caught by .gitignore, but good to enforce)
-poetry.lock
+uv.lock
 .terraform/
 .terraform.lock.hcl
 .terraform-version

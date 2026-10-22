@@ -16,7 +16,7 @@ tags:
 
 ## Decision
 
-The clear, concise statement of the decision that has been made. For example: "We will use Poetry for dependency management for all Python sub-projects."
+The clear, concise statement of the decision that has been made. For example: "We will use uv for dependency management for all Python sub-projects."
 
 ## Considered Options
 

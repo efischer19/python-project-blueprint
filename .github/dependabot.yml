@@ -11,16 +11,11 @@ updates:
         patterns:
           - "*"
 
-  # Monitor pip dependencies for example-app
-  - package-ecosystem: "pip"
-    directory: "/apps/example-app"
+  # Monitor uv dependencies for the whole workspace (apps/* and libs/*).
+  # The uv ecosystem updates each member's pyproject.toml together with the
+  # shared root uv.lock, keeping the lock file in sync.
+  - package-ecosystem: "uv"
+    directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
-
-  # Monitor pip dependencies for example-lib
-  - package-ecosystem: "pip"
-    directory: "/libs/example-lib"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10

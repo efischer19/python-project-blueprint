@@ -33,7 +33,7 @@ superseding ADR-003 (Poetry).
 Each application in `apps/` and each library in `libs/` will have its own
 `pyproject.toml` managed by uv. This provides:
 
-- **Deterministic dependency resolution** via `uv.lock` files.
+- **Deterministic dependency resolution** via a shared `uv.lock` file.
 - **Standardized project metadata** in `pyproject.toml` (PEP 621
   compliant).
 - **Virtual environment management** — uv creates and manages isolated
@@ -49,10 +49,8 @@ on local libraries by name without brittle relative file paths.
 
 ### Key Conventions
 
-- Applications **commit** their `uv.lock` files for reproducible
-  deployments.
-- Libraries **may** choose to exclude `uv.lock` from version control
-  to test against the latest compatible versions.
+- The workspace has a **single** `uv.lock` at the repository root,
+  committed to version control, covering every app and library.
 - Use `uv sync` to install dependencies into the project's `.venv`.
 - Use `uv run <command>` to execute commands within the virtual
   environment (e.g., `uv run pytest`, `uv run ruff check .`).

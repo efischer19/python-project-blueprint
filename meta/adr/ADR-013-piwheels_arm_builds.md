@@ -18,7 +18,7 @@ tags:
   to tens of minutes or more, especially for packages with heavy native
   dependencies (numpy, pandas, cryptography, etc.).
 * **Constraints:** The solution must not affect x86_64 builds, must work
-  with standard pip/Poetry workflows, and must not require vendoring or
+  with standard pip/uv workflows, and must not require vendoring or
   maintaining custom package builds.
 
 ## Decision
@@ -92,7 +92,7 @@ RUN echo "[global]\nextra-index-url = https://www.piwheels.org/simple" \
 
 * **Positive:** ARM Docker builds complete in a fraction of the time.
   No changes to application code or dependency specifications. Works
-  with existing Poetry/pip workflows.
+  with existing uv/pip workflows.
 * **Negative:** Adds an external dependency on the piwheels service.
   Packages may occasionally be unavailable or slightly behind PyPI.
 * **Future Implications:** As ARM adoption grows and PyPI adds more

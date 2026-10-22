@@ -80,12 +80,13 @@ Runs on every pull request and push to `main`. It:
 `.github/dependabot.yml` is configured to monitor:
 
 * `github-actions` — weekly, with grouped PRs
-* `pip` — weekly, for each `apps/` and `libs/` subdirectory
+* `uv` — weekly, at the repository root, updating each member's
+  `pyproject.toml` and the shared `uv.lock` together
 
 ## Considered Options
 
 1. **GitHub Actions with reusable composite action (Chosen):** A
-   multi-workflow setup using a local composite action for Python/Poetry.
+   multi-workflow setup using a local composite action for Python/uv.
     * *Pros:* Native GitHub integration, no additional secrets needed for
       the template, composite action avoids duplication, caching keeps
       jobs fast, artifacts allow Docker image inspection without a registry.
@@ -114,5 +115,5 @@ Runs on every pull request and push to `main`. It:
 * **Future Implications:** Downstream blueprints (e.g., a
   cloud-deployment-specific blueprint) can extend these workflows by
   uncommenting the publish step or adding registry push steps with
-  minimal changes. See ADR-006 for Docker conventions and ADR-003 for
-  Poetry conventions.
+  minimal changes. See ADR-006 for Docker conventions and ADR-015 for
+  uv conventions.
